@@ -634,7 +634,7 @@ body::before {
 
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-    const supabase = createClient("https://hxdpeqfcefhrfonegtok.supabase.co", "sb_publishable_g82aHODUwq-eaULqMl_MQw_n8Hn-LO-");
+    const supabase = createClient("https://hxdpeqfcefhrfonegtok.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4ZHBlcWZjZWZocmZvbmVndG9rIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQwMDc4OTMsImV4cCI6MjA4OTU4Mzg5M30.i_c9zU6sABenDuHZtwK4ZQ9KWDOJh7QB07GezDIkWqM");
 
     // ==========================================
     // 1. NAVIGATION ET MENU (CORRIGÉS)
@@ -670,14 +670,15 @@ body::before {
     // ==========================================
     // 2. CHARGEMENT DES JOUEURS
     // ==========================================
-    async function chargerDonnees() {
+    let tousLesJoueurs = []; // Ajout de la variable de stockage
+async function chargerDonnees() {
         const pc = document.getElementById('listeJoueursPublique');
         if(!pc) return;
 
         pc.innerHTML = "<p style='text-align:center;'>Détection des talents en ligne...</p>";
 
         const { data: js, error } = await supabase.from('joueurs').select('*'); 
-
+tousLesJoueurs = js;
         if (error) {
             pc.innerHTML = `<p style='color:red; text-align:center;'>Erreur : ${error.message}</p>`;
             return;
@@ -720,7 +721,7 @@ body::before {
     // 3. INSCRIPTION JOUEUR
     // ==========================================
     window.validerJoueur = async () => {
-    const btn = document.querySelector("#page-recrutement button");
+    const btn = document.querySelector("#page-recrutement button:last-of-type");
     const p = document.getElementById('p_pseudo').value;
     const f = document.getElementById('p_photo').files[0];
     const w = document.getElementById('p_wa').value;
@@ -761,7 +762,7 @@ body::before {
     // 4. GESTION DES GUILDES
     // ==========================================
    window.validerGuilde = async () => {
-    const btn = document.querySelector("#page-certif button");
+    const btn = document.querySelector("#page-guildes button");
     const n = document.getElementById('g_nom').value;
     const c = document.getElementById('g_chef').value;
     const w = document.getElementById('g_wa').value;
