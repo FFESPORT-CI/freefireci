@@ -485,11 +485,11 @@ body { font-family: 'Orbitron', sans-serif !important; }
 
 .box:hover, .player-card:hover {
     border-color: var(--primary) !important;
-    box-shadow: 0 0 15px rgba(255, 102, 0, 0.3); /* Lueur orange */
+    box-shadow: 0 0 15px rgba(255, 102, 0, 0.3); 
     transform: translateY(-5px);
 }
 
-/* Style spécifique pour le bouton de partage */
+
 .btn-share {
     background: transparent;
     border: 1px solid #444;
@@ -718,6 +718,112 @@ body { font-family: 'Orbitron', sans-serif !important; }
 
         <div id="listeGuildes"></div>
     </div>
+</section>
+
+<section id="page-recrutement" class="page">
+
+    <div class="container">
+
+        <h2 style="text-align:center;">S'ENREGISTRER</h2>
+
+        <div class="box">
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+
+                <input type="text" id="p_pseudo" placeholder="Pseudo" style="padding-left:15px">
+
+                <select id="p_role" style="padding-left:15px">
+
+                    <option value="Fusilier">🔫 Fusilier</option>
+
+                    <option value="Rusher">⚔️ Rusher</option>
+
+                    <option value="Sniper">🎯 Sniper</option>
+
+                    <option value="Support">🛡️ Support</option>
+
+                    <option value="Bombardier">💣 Bombardier</option>
+
+                </select>
+
+                <input type="number" id="p_lvl" placeholder="Niveau (Ex: 72)" style="padding-left:15px">
+
+               
+
+              <div style="display: flex; gap: 5px;">
+
+                    <select id="p_pays" style="flex: 0.4; padding-left:5px; font-size: 13px; background: #222; color: white; border: 1px solid #333; border-radius: 8px;">
+
+                        <option value="225">🇨🇮 +225</option>
+
+                        <option value="221">🇸🇳 +221</option>
+
+                        <option value="223">🇲🇱 +223</option>
+
+                        <option value="226">🇧🇫 +226</option>
+
+                        <option value="224">🇬🇳 +224</option>
+
+                        <option value="237">🇨🇲 +237</option>
+
+                        <option value="241">🇬🇦 +241</option>
+
+                        <option value="229">🇧🇯 +229</option>
+
+                        <option value="228">🇹🇬 +228</option>
+
+                        <option value="242">🇨🇬 +242</option>
+
+                        <option value="243">🇨🇩 +243</option>
+
+                        <option value="212">🇲🇦 +212</option>
+
+                        <option value="216">🇹🇳 +216</option>
+
+                        <option value="213">🇩🇿 +213</option>
+
+                        <option value="227">🇳🇪 +227</option>
+
+                        <option value="235">🇹🇩 +235</option>
+
+                        <option value="261">🇲🇬 +261</option>
+
+                        <option value="33">🇫🇷 +33</option>
+
+                        <option value="1">🇺🇸 +1</option>
+
+                    </select>
+
+                    <input type="number" id="p_wa" placeholder="WhatsApp" style="flex: 1; padding-left:10px">
+
+                </div>
+
+            </div>
+
+            <label>Photo du compte (Screenshot Lobby)</label>
+
+            <input type="file" id="p_photo" accept="image/*" style="padding-left:15px">
+
+            <button onclick="validerJoueur()" style="padding-left:0; margin-top:15px">PUBLIER MON PROFIL</button>
+
+        </div>
+
+        <div class="player-grid" id="listeJoueurs"></div>
+
+    </div>
+
+
+
+    <div id="preview-container" style="margin-top: 20px; border-top: 1px dashed #444; padding-top: 20px;">
+
+    <p style="font-size: 10px; color: #666; text-align: center;">APERCU DE TA CARTE :</p>
+
+    <div id="card-preview"></div>
+
+</div>
+
+
+
 </section>
 
 <section id="page-tournois" class="page">
