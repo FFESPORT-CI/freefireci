@@ -20,7 +20,17 @@
 <link rel="apple-touch-icon" href="ffesci.png">
 
  <style>
-    :root { 
+
+    .page {
+        display: none !important;
+        padding-top: 20px;
+    }
+
+    .page.active {
+        display: block !important;
+    }
+
+   :root { 
         --primary: #ff6600; 
         --secondary: #25D366; 
         --dark: #0d0d0d; 
@@ -143,33 +153,28 @@
     } 
 }
 
-
 @media (max-width: 850px) {
     .menu-toggle { 
-        display: flex; 
+        display: flex; /* Affiche le bouton burger */
     } 
 
     nav {
-        left: -100%; 
-        width: 250px !important;
+        left: auto !important; /* Annule le positionnement à gauche */
+        right: -100%; /* Cache le menu à DROITE */
+        width: 280px !important;
         height: 100vh !important;
-        flex-direction: column !important;
-        transition: 0.4s ease-in-out;
-        border-right: 2px solid var(--primary);
+        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         background: #111;
         position: fixed;
-        padding-top: 60px;
+        padding-top: 80px;
+        border-left: 2px solid var(--primary); /* Bordure à gauche du menu */
+        border-right: none !important;
     }
 
+    /* Cette classe sera ajoutée par ton JavaScript */
     nav.open {
-        left: 0; 
-    }
-
-    nav a {
-        width: 100%;
-        box-sizing: border-box;
-        border-bottom: 1px solid #222 !important;
-        padding: 20px !important;
+        right: 0 !important; 
+        left: auto !important;
     }
 
     .page { 
@@ -181,6 +186,7 @@
     footer {
         margin-left: 0 !important;
     }
+}
   
     .but-grid {
         display: grid;
@@ -205,7 +211,7 @@
     h2 {
         font-size: 1.5em;
     }
-}
+
 
 body::before {
     content: "";
@@ -737,6 +743,154 @@ body { font-family: 'Orbitron', sans-serif !important; }
     border-left: 2px solid var(--primary);
 }
 
+:root {
+    --primary: #ff4b2b; /* Rouge Gaming */
+    --gold: #ffcc00;
+    --dark: #0a0a0a;
+}
+
+.text-glow {
+    color: var(--primary);
+    text-shadow: 0 0 10px rgba(255, 75, 43, 0.7);
+}
+
+.hero-gaming {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('ton-fond-freefire.jpg');
+    background-size: cover;
+    padding: 60px 20px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.badge-live {
+    background: red;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink { 50% { opacity: 0.5; } }
+
+.btn-main {
+    background: var(--primary);
+    box-shadow: 0 0 20px rgba(255, 75, 43, 0.4);
+    border: none;
+    padding: 15px 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-main:hover { transform: scale(1.05); }
+
+.quick-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.stat-item {
+    background: #111;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    border-bottom: 3px solid var(--primary);
+}
+
+.btn-main {
+    transition: all 0.3s ease; /* Transition fluide */
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.btn-main:hover {
+    transform: scale(1.05); /* Légère augmentation */
+    box-shadow: 0 0 15px var(--primary); /* Effet néon */
+    filter: brightness(1.2); /* Éclaircissement */
+}
+
+/* Classe pour les éléments qui doivent apparaître */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+/* Classe ajoutée par le JS quand l'élément est visible */
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card {
+    background: #111;
+    border: 1px solid #222;
+    transition: border 0.3s ease;
+}
+
+.card:hover {
+    border: 1px solid var(--primary);
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.05);
+}
+
+@media (max-width: 768px) {
+    /* Le conteneur du menu */
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%; /* Caché complètement à droite */
+        width: 250px; /* Largeur fixe du menu */
+        height: 100%;
+        background-color: #111; /* Couleur de ton menu */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: right 0.4s ease-in-out; /* L'animation vient de la droite */
+        z-index: 999;
+    }
+
+    /* La classe qui déclenche l'ouverture */
+    .nav-links.active {
+        right: 0; /* Revient à sa position visible */
+    }
+}
+
+@media (max-width: 768px) {
+    .burger {
+        position: fixed;
+        right: 20px; /* Écart par rapport au bord droit */
+        top: 20px;
+        z-index: 1000;
+        cursor: pointer;
+    }
+}
+
+/* Le voile noir */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Noir transparent */
+    backdrop-filter: blur(3px); /* Flou optionnel */
+    z-index: 998; /* Juste en dessous du menu (999) */
+    display: none; /* Caché par défaut */
+}
+
+/* On l'affiche quand le menu est ouvert */
+.menu-overlay.active {
+    display: block;
+}
+
 </style>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
@@ -764,21 +918,43 @@ body { font-family: 'Orbitron', sans-serif !important; }
 </nav>
 
 <section id="page-accueil" class="page active">
- <div class="news-ticker">
+<div class="news-ticker">
+
     <div class="ticker-wrap">
+
         <div class="ticker-item">
+
             🏆 **CLASH OF GUILDS :** Les inscriptions ouvriront bientôt ! Plus d'infos dans l'onglet **TOURNOI**. 🔥
+
         </div>
+
         <div class="ticker-item">
+
             🏆 **CLASH OF GUILDS :** Les inscriptions ouvriront bientôt ! Plus d'infos dans l'onglet **TOURNOI**. 🔥
+
+        </div>
+
+    </div>
+
+</div>
+    <div class="hero-gaming">
+        <div class="hero-content">
+            <div class="badge-live">LIVE CÔTE D'IVOIRE 🇨🇮</div>
+            <h1>FREE FIRE <span class="text-glow">ESPORT-CI</span></h1>
+            <p>La plateforme n°1 des soldats ivoiriens. Entrez dans la légende.</p>
+            
+            <div class="hero-btns">
+                <button onclick="showPage('page-tournois')" class="btn-main">🏆 REJOINDRE LE TOURNOI</button>
+                <button onclick="showPage('page-commu')" class="btn-sub">💬 LA COMMUNAUTÉ</button>
+            </div>
         </div>
     </div>
-</div>
-    <h1>FREE FIRE ESPORT-CI</h1>
-    <h2>UNITÉ • FORCE • VICTOIRE</h2>
-    <p style="color: #888; font-size: 1.1em;">ENTRER DANS LA COMMUNAUTE ET DOMINEZ LA SCÈNE FREE FIRE IVOIRIENNE</p>
-    <button onclick="showPage('page-recrutement')" style="width: 250px; border-radius: 50px;">REJOINDRE L'ÉLITE</button>
-    
+
+    <div class="quick-stats">
+        <div class="stat-item"><strong>50+</strong><span>Joueurs</span></div>
+        <div class="stat-item"><strong>20+</strong><span>Guildes</span></div>
+        <div class="stat-item"><strong>15M</strong><span>Cashprize</span></div>
+    </div>
 </section>
 
 <section id="page-but" class="page">
@@ -1008,14 +1184,13 @@ body { font-family: 'Orbitron', sans-serif !important; }
 </section>
 
 <section id="page-commu" class="page">
-    <h2 style="text-align:center; color: var(--secondary); font-size: 2.5em;">REJOINS COMMUNAUTE WHATSAPP DE FREE FIRE ESPORT-CI</h2>
+    <div class="container">
+        <h2 style="text-align:center; color: var(--secondary); font-size: 2.5em;">REJOINS LA COMMUNAUTÉ</h2>
         <div class="box" style="text-align: center; border-color: var(--secondary);">
             <i class="fab fa-whatsapp fa-5x" style="color: var(--secondary); margin-bottom: 20px;"></i>
             <h3>GROUPE OFFICIEL WHATSAPP</h3>
             <p style="color: #bbb; line-height: 1.6;">
-                Ne manque aucune info sur les tournois, trouve des partenaires de jeu en direct 
-                et discute avec les meilleurs joueurs de Côte d'Ivoire. 
-                Respect et fair-play exigés !
+                Ne manque aucune info sur les tournois et discute avec les meilleurs joueurs de CI.
             </p>
             <br>
             <button onclick="window.open('https://chat.whatsapp.com/KUm4uoqUBgD78Bh3onKOCi')" class="btn-wa" style="width: auto; padding: 15px 40px; border-radius: 50px; font-size: 1.2em;">
@@ -1035,6 +1210,16 @@ body { font-family: 'Orbitron', sans-serif !important; }
                 <p>Trouve une guilde en 2 minutes.</p>
             </div>
         </div>
+    </div> </section>
+
+
+<section id="page-maj" class="page">
+    <div class="container" style="padding: 20px;">
+        <h2 style="text-align: center; color: var(--primary);">🛠️ JOURNAL DES MISES À JOUR</h2>
+        <p style="text-align: center; color: #888; font-size: 14px;">Suivez l'évolution de la plateforme FF ESPORT-CI</p>
+
+        <div id="liste-maj" style="margin-top: 20px;">
+            </div>
     </div>
 </section>
 
@@ -1112,16 +1297,6 @@ body { font-family: 'Orbitron', sans-serif !important; }
 
 <div id="card-preview">
    </div>
-<section id="page-maj" class="page">
-    <div class="container" style="padding: 20px;">
-        <h2 style="text-align: center; color: var(--primary);">🛠️ JOURNAL DES MISES À JOUR</h2>
-        <p style="text-align: center; color: #888; font-size: 14px;">Suivez l'évolution de la plateforme FF ESPORT-CI</p>
-
-        <div id="liste-maj" style="margin-top: 20px;">
-            </div>
-    </div>
-</section>
-
 
 <footer>
     <div style="margin-bottom: 15px;">
@@ -1134,6 +1309,7 @@ body { font-family: 'Orbitron', sans-serif !important; }
         <a href="#" style="color: #444;"><i class="fab fa-instagram"></i></a>
         <a href="#" style="color: #444;"><i class="fab fa-tiktok"></i></a>
     </div>
+
 </footer>
 
 <script type="module">
@@ -1832,6 +2008,85 @@ function showPage(id) {
     }
 }
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    // On charge les joueurs dès que la page est prête
+    chargerDonnees(); 
+    // On charge les guildes
+    chargerGuildes();
+});
+
+window.addEventListener('scroll', () => {
+    const reveals = document.querySelectorAll('.reveal');
+    reveals.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) {
+            el.classList.add('active');
+        }
+    });
+});
+
+const burger = document.querySelector('.burger');
+const nav = document.querySelector('.nav-links');
+const navItems = document.querySelectorAll('.nav-links li');
+
+burger.addEventListener('click', () => {
+    // Ouvre/Ferme le menu
+    nav.classList.toggle('active');
+    
+    // Animation du burger (pour qu'il se transforme en X)
+    burger.classList.toggle('toggle');
+});
+
+// Fermer le menu automatiquement quand on clique sur un lien
+navItems.forEach(link => {
+    link.addEventListener('click', () => {
+        nav.classList.remove('active');
+        burger.classList.remove('toggle');
+    });
+});
+
+// Fermer le menu au clic à l'extérieur
+document.addEventListener('click', (event) => {
+    const navbar = document.querySelector('nav');
+    const menuBtn = document.querySelector('.menu-toggle');
+
+    // On vérifie si le menu est ouvert
+    if (navbar.classList.contains('open')) {
+        // Si le clic n'est PAS sur le nav et PAS sur le bouton burger
+        if (!navbar.contains(event.target) && !menuBtn.contains(event.target)) {
+            navbar.classList.remove('open');
+            
+            // On remet l'icône burger (si tu as l'icône qui change)
+            const icon = menuBtn.querySelector('i');
+            if (icon) {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        }
+    }
+});
+
+// Crée l'overlay dynamiquement s'il n'existe pas dans ton HTML
+if (!document.querySelector('.menu-overlay')) {
+    const overlay = document.createElement('div');
+    overlay.className = 'menu-overlay';
+    document.body.appendChild(overlay);
+}
+
+const overlay = document.querySelector('.menu-overlay');
+
+menuBtn.addEventListener('click', () => {
+    navbar.classList.toggle('open');
+    overlay.classList.toggle('active'); // Affiche/Cache le voile
+});
+
+// Fermer en cliquant sur le voile
+overlay.addEventListener('click', () => {
+    navbar.classList.remove('open');
+    overlay.classList.remove('active');
+    menuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+});
 
 </script>
 
