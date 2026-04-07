@@ -891,6 +891,17 @@ body { font-family: 'Orbitron', sans-serif !important; }
     display: block;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* Empêche le défilement horizontal */
+    position: relative;
+}
+
+img, table, div {
+    max-width: 100%;
+    box-sizing: border-box; /* Force le calcul propre des bordures */
+}
+
 </style>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
