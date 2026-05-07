@@ -880,20 +880,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     chargerStats();
     chargerJoueurs();
 
-    // Détecter si on revient d'un callback OAuth (le hash contient access_token)
+    // Détecter si on revient d'un callback OAuth
     const hash = window.location.hash;
     const isOAuthCallback = hash.includes('access_token=');
 
     if (isOAuthCallback) {
-        // Nettoyer l'URL immédiatement
+        // Nettoyer l'URL
         history.replaceState(null, '', window.location.pathname);
 
         // Attendre que Supabase traite le token
-        await new Promise(resolve => setTimeout(resolve, 800));
+        await new Promise(resolve => setTimeout(resolve, 1200));
 
         const { data: { session } } = await supabase.auth.getSession();
 
         if (session) {
+            sessionInitialized = true; // Bloquer onAuthStateChange pour éviter doublon
             const { data: profil } = await supabase
                 .from('joueurs')
                 .select('id_user')
@@ -901,20 +902,22 @@ document.addEventListener('DOMContentLoaded', async () => {
                 .single();
 
             if (profil) {
+                afficherNotif("✅ Connecté !");
                 showPage('page-profil');
                 verifierSession();
             } else {
-                showPage('page-create-profil');
+                afficherNotif("✅ Connecté ! Crée ton profil soldat.");
                 window._profilActuel = null;
+                showPage('page-create-profil');
             }
         } else {
             afficherNotif("⚠ Erreur de connexion, réessaie !");
-            showPage('page-accueil');
+            showPage('page-profil');
         }
         return;
     }
 
-    // Navigation normale via hash
+    // Navigation normale
     const pageHash = hash.replace('#', '');
     if (pageHash && document.getElementById(pageHash)) {
         showPage(pageHash);
